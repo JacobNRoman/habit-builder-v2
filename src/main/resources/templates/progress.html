@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+<header th:replace="fragments :: header"></header>
+
+<canvas id="progressChart" width="200" height="100"></canvas>
+<script type="text/javascript" th:src="@{/js/chart.js}"></script>
+
+<table>
+    <tr>
+        <td><strong>Date</strong></td>
+        <td><strong>Task</strong></td>
+        <td><strong>Length</strong></td>
+    </tr>
+    <tr th:each="taskSession : ${taskSessions}">
+        <td th:text="${#temporals.format(taskSession.date, 'dd/MMM/yyyy')}"></td>
+       <!-- <td th:text="${#temporals.format(taskSession.start, 'HH:mm')}"></td>
+        <td th:text="${#temporals.format(taskSession.stop, 'HH:mm')}"></td> -->
+        <td th:text="${taskSession.task.name}"></td>
+        <td th:text="${taskSession.lengthToString}"></td>
+    </tr>
+</table>
+
+</body>
+</html>

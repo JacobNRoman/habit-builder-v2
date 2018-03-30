@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body>
+<header th:replace="fragments :: header"></header>
+
+<form th:object="${task}" method="post">
+    <div class="form-group">
+        <label th:for="name">Name:</label>
+        <input th:field="*{name}"/>
+    </div>
+    <div class="form-group">
+        <label th:for="goal">Goal time:</label>
+        <select th:field="*{goal}">
+            <option value="10">10 min</option>
+            <option value="20">20 min</option>
+            <option value="30">30 min</option>
+            <option value="40">40 min</option>
+            <option value="50">50 min</option>
+            <option value="60">60 min</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Add Task"/>
+    </div>
+</form>
+
+</body>
+</html>

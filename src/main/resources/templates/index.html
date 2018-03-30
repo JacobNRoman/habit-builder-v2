@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+<header th:replace="fragments :: header"></header>
+
+<table>
+    <tr>
+        <td></td>
+        <td><strong>Name</strong></td>
+        <td><strong>Goal</strong></td>
+        <td></td>
+    </tr>
+    <tr th:each="task : ${tasks}">
+        <td>
+          <!-- <p th:text="${task.isAccomplished}"></p> -->
+        </td>
+        <td>
+            <p th:text="${task.name}"></p>
+        </td>
+        <td>
+            <p th:text="${task.goal} + ' minutes'"></p>
+        </td>
+        <td>
+            <a th:href="'/task/' + ${task.id}"><button>Start Task</button></a>
+        </td>
+    </tr>
+</table>
+<a href="/add">Add task</a>
+
+</body>
+</html>

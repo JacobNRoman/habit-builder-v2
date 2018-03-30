@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+<header th:replace="fragments :: header"></header>
+
+<p id="demo"></p>
+
+<p th:text="'Goal: ' + ${task.goal} + ' minutes'"></p>
+
+<form th:if="!${taskSession}" th:action="'/task/' + ${task.id}" method="post">
+    <button type="submit" id="start">Start Working!</button>
+</form>
+<form th:if="${taskSession}" th:action="'/task/' + ${task.id} + '/' + ${taskSession.id}" method="post">
+    <button id="start" type="submit">Stop Working!</button>
+</form>
+
+<script type="text/javascript" th:src="@{/js/clock.js}"></script>
+</body>
+</html>

@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head>
-    <title>Spring Security Example</title>
-</head>
-<body>
-<h1>Welcome!</h1>
 
-<p>Click <a th:href="@{/habit}">here</a> to see a greeting.</p>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+    <h1>Welcome to the Habit Builder</h1>
+
+    <p><a href="/login">Login</a> or <a href="/register">Register</a> to get started!</p>
 </body>
 </html>
