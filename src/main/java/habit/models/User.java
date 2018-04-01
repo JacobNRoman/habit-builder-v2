@@ -16,6 +16,9 @@ public class User {
     private int enabled;
     @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
     private Set<UserRole> roles;
+    @OneToMany(mappedBy = "user")
+    private Set<Task> tasks;
+
 
     public User(){}
 
@@ -90,5 +93,13 @@ public class User {
 
     public void setRoles(Set<UserRole> roles) {
         this.roles = roles;
+    }
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
     }
 }

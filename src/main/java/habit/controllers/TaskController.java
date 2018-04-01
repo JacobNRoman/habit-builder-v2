@@ -2,7 +2,11 @@ package habit.controllers;
 
 import habit.models.Task;
 import habit.models.TaskSession;
+import habit.models.User;
+import habit.models.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -12,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @Controller
 public class TaskController {
@@ -23,10 +26,18 @@ public class TaskController {
     @Autowired
     habit.models.TaskSessionDao sessionDao;
 
+    @Autowired
+    UserDao userDao;
+
     @RequestMapping(value="")
     public String index(Model model){
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        User currentUser = userDao.findByEmail(currentPrincipalName);
+
         model.addAttribute("title", "Tasks");
-        model.addAttribute("tasks", taskDao.findAll());
+        model.addAttribute("tasks", taskDao.findAllByUser(currentUser));
 
         return "index";
     }
@@ -46,6 +57,16 @@ public class TaskController {
 
             return "add";
         }
+        /*
+        Below is a quick and possibly hacky way to get the current logged in user's credentials.
+        Once i get the current user's email I query the database for their full info. I think
+        it might be possible to do this without the query by adding more info to the security context
+        but I don't know if that is a good idea.
+         */
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        User taskOwner = userDao.findByEmail(currentPrincipalName);
+        task.setUser(taskOwner);
         taskDao.save(task);
         return "redirect:";
     }
@@ -92,8 +113,12 @@ public class TaskController {
     @RequestMapping(value="progress")
     public String progress(Model model){
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        User currentUser = userDao.findByEmail(currentPrincipalName);
+
         model.addAttribute("title", "My Progress");
-        model.addAttribute("taskSessions", sessionDao.findAllByOrderByIdDesc());
+        model.addAttribute("taskSessions", sessionDao.findAllByTaskUserOrderByIdDesc(currentUser));
 
         return "progress";
     }

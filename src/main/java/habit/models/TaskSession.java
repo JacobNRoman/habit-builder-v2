@@ -1,9 +1,6 @@
 package habit.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -21,6 +18,7 @@ public class TaskSession {
     private LocalDate date;
 
     @ManyToOne
+    @JoinColumn(name="task_id")
     private Task task;
 
     public TaskSession(){}

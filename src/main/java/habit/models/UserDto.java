@@ -5,6 +5,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class UserDto {
+    //TODO - I really need to do a thorough testing of my validations. Also implement more validation?
     @NotNull
     @NotEmpty
     private String firstName;

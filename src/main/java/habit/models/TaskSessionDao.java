@@ -9,5 +9,6 @@ import java.util.List;
 @Repository
 @Transactional
 public interface TaskSessionDao extends CrudRepository<TaskSession, Integer> {
-    public List<TaskSession> findAllByOrderByIdDesc();
+    List<TaskSession> findAllByOrderByIdDesc();
+    List<TaskSession> findAllByTaskUserOrderByIdDesc(User user);
 }

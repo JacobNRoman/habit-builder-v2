@@ -2,7 +2,6 @@ package habit.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,13 +18,14 @@ public class Task {
     @NotNull
     private int goal;
 
-    @OneToMany
-    @JoinColumn(name="session_id")
-    private List<habit.models.TaskSession> sessions = new ArrayList<>();
+    @OneToMany(mappedBy="task")
+    private List<habit.models.TaskSession> sessions;
 
+    //TODO despite having a Goal, isAccomplished currently does nothing.
     private boolean isAccomplished;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     public Task(){}
