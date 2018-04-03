@@ -19,7 +19,9 @@
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-aop:2.0.0.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter-jdbc:2.0.0.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter:2.0.0.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-devtools:2.0.0.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: mysql:mysql-connector-java:5.1.13" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.7" level="project" />
     <orderEntry type="library" name="Gradle: junit:junit:4.12" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.security:spring-security-test:5.0.3.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-test-autoconfigure:2.0.0.RELEASE" level="project" />

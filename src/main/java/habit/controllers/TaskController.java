@@ -1,5 +1,6 @@
 package habit.controllers;
 
+import com.google.gson.Gson;
 import habit.models.Task;
 import habit.models.TaskSession;
 import habit.models.User;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 @Controller
 public class TaskController {
@@ -62,6 +65,7 @@ public class TaskController {
         Once i get the current user's email I query the database for their full info. I think
         it might be possible to do this without the query by adding more info to the security context
         but I don't know if that is a good idea.
+        TODO - this snippet is not DRY. I used it three times on this page, need to refactor
          */
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
@@ -117,8 +121,40 @@ public class TaskController {
         String currentPrincipalName = authentication.getName();
         User currentUser = userDao.findByEmail(currentPrincipalName);
 
+        /*
+        TODO - create datasets to pass to chart.js
+        Step 1 - find all tasks belonging to current user
+        Step 2 - per task, create a hashset of time/date pairs for each session
+        Step 3 - wrap up datasets and pass to chart using json
+         */
+
+        ArrayList<Task> tasks = new ArrayList<>(taskDao.findAllByUser(currentUser));
+        // dataSets is a list that will hold the sets of time/date pairs associated with each task
+        // the dates will be strings formatted to ISO 8601. Structure: HashMap<String taskname, Hashmap<length, date>>
+        HashMap<String, HashMap<Long, String>> dataSets = new HashMap<>();
+        ListIterator litr = tasks.listIterator();
+        //iterate over a list of all the user's tasks
+        while (litr.hasNext()){
+            Task i = (Task) litr.next();
+            String taskName = i.getName();
+            ArrayList<TaskSession> sessions = new ArrayList<>(sessionDao.findAllByTask(i));
+            HashMap<Long, String> timeDates = new HashMap<>(); //this will contain the final dataset
+            //iterate over the list of sessions
+            ListIterator sitr = sessions.listIterator();
+            while (sitr.hasNext()){
+                TaskSession j = (TaskSession) sitr.next();
+                Long time = j.getLength(); //TODO - this is currently in seconds. That isn't ideal.
+                String date = j.getDate().format(DateTimeFormatter.ISO_LOCAL_DATE);
+                timeDates.put(time, date);
+            }
+            dataSets.put(taskName, timeDates);
+        }
+        Gson gson = new Gson();
+        String jsonDataset = gson.toJson(dataSets);
+
         model.addAttribute("title", "My Progress");
         model.addAttribute("taskSessions", sessionDao.findAllByTaskUserOrderByIdDesc(currentUser));
+        model.addAttribute("datasets", jsonDataset);
 
         return "progress";
     }

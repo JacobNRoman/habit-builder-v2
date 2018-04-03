@@ -5,8 +5,53 @@
 <header th:replace="fragments :: header"></header>
 
 <canvas id="progressChart" width="200" height="100"></canvas>
-<script type="text/javascript" th:src="@{/js/chart.js}"></script>
-
+<script th:inline="javascript" type="text/javascript">
+var ctx = document.getElementById("progressChart");
+var myData = [[${datasets}]];
+var myDataParsed = JSON.parse(myData);
+var numberOfTasks = Object.keys(myDataParsed).length;
+var setLabels = Object.keys(myDataParsed);
+var GraphColors = ['#ff0000', '#00ff00', '#0000ff', '#ffd400', '#ff00ff', '#00ffff', '#000000', '#008620', '#001a9f', '#0096ff', '#dccf00', '#8d0088', '#890101', '#beb4b4', '#686868'];
+var GraphDatasetsArray = [];
+var dates = []
+for (i=0; i < numberOfTasks; i++){
+    var dataArray = Object.keys(myDataParsed[setLabels[i]]);
+    GraphDatasetsArray[i] =
+        {
+            label: setLabels[i],
+            data: dataArray,
+            fill: false,
+            borderColor: GraphColors[i],
+            backgroundColor: GraphColors[i],
+            pointBackgroundColor: '#ffffff',
+            tension: 0,
+        }
+    for (j=0; j < dataArray.length; j++){
+        if (myDataParsed[setLabels[i]][j]){
+            var dateExists = 0;
+            for (k=0; k < dates.length; k++){
+                if(dates[k] == myDataParsed[setLabels[i]][j]){
+                    dateExists += 1;
+                }
+            }
+            if (dateExists == 0){
+                dates.push(myDataParsed[setLabels[i]][j]);
+                }
+            }
+        }
+    }
+alert(dates);
+alert(GraphDatasetsArray);
+//SET THE GRAPH CONFIGURATION VALUES
+var LineChartConfig = {
+    type: 'line',
+    data: {
+        labels: dates,
+        datasets: GraphDatasetsArray,
+    },
+};
+var progressChart = new Chart(ctx, LineChartConfig);
+</script>
 <table>
     <tr>
         <td><strong>Date</strong></td>
@@ -21,6 +66,8 @@
         <td th:text="${taskSession.lengthToString}"></td>
     </tr>
 </table>
+
+<p th:text="${datasets}"></p>
 
 </body>
 </html>
