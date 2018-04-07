@@ -10,12 +10,28 @@ var ctx = document.getElementById("progressChart");
 var myData = [[${datasets}]];
 var myDataParsed = JSON.parse(myData);
 var numberOfTasks = Object.keys(myDataParsed).length;
+//setLabels are the labels for each dataset, ie the task names.
 var setLabels = Object.keys(myDataParsed);
+//there are fifteen colors in GraphColors, so that each new task can have a new color.
 var GraphColors = ['#ff0000', '#00ff00', '#0000ff', '#ffd400', '#ff00ff', '#00ffff', '#000000', '#008620', '#001a9f', '#0096ff', '#dccf00', '#8d0088', '#890101', '#beb4b4', '#686868'];
+//GraphDatasetsArray will contain all the datasets, formatted for chart.js
 var GraphDatasetsArray = [];
-var dates = []
 for (i=0; i < numberOfTasks; i++){
-    var dataArray = Object.keys(myDataParsed[setLabels[i]]);
+    var dataArray = []
+    //times is specifically pulling the times here.
+    var times = Object.keys(myDataParsed[setLabels[i]]);
+    //this for loop creates the dates array.
+    for (j=0; j < times.length; j++){
+        if (myDataParsed[setLabels[i]][times[j]]){
+            var date = moment(myDataParsed[setLabels[i]][times[j]]);
+            var time = times[j];
+            var dataPoint = {
+                x: date,
+                y: time
+            }
+            dataArray.push(dataPoint);
+        }
+    }
     GraphDatasetsArray[i] =
         {
             label: setLabels[i],
@@ -24,32 +40,24 @@ for (i=0; i < numberOfTasks; i++){
             borderColor: GraphColors[i],
             backgroundColor: GraphColors[i],
             pointBackgroundColor: '#ffffff',
-            tension: 0,
         }
-    for (j=0; j < dataArray.length; j++){
-        if (myDataParsed[setLabels[i]][j]){
-            var dateExists = 0;
-            for (k=0; k < dates.length; k++){
-                if(dates[k] == myDataParsed[setLabels[i]][j]){
-                    dateExists += 1;
-                }
-            }
-            if (dateExists == 0){
-                dates.push(myDataParsed[setLabels[i]][j]);
-                }
-            }
-        }
-    }
-alert(dates);
-alert(GraphDatasetsArray);
+}
 //SET THE GRAPH CONFIGURATION VALUES
 var LineChartConfig = {
     type: 'line',
-    data: {
-        labels: dates,
-        datasets: GraphDatasetsArray,
-    },
+    data: {datasets: GraphDatasetsArray,},
+    options: {
+        scales: {
+            xAxes: [{
+                type: "time",
+                time: {
+                    unit: 'day',
+                }
+            }]
+        },
+    }
 };
+
 var progressChart = new Chart(ctx, LineChartConfig);
 </script>
 <table>
