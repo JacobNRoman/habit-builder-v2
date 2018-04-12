@@ -131,21 +131,26 @@ public class TaskController {
         ArrayList<Task> tasks = new ArrayList<>(taskDao.findAllByUser(currentUser));
         // dataSets is a list that will hold the sets of time/date pairs associated with each task
         // the dates will be strings formatted to ISO 8601. Structure: HashMap<String taskname, Hashmap<length, date>>
-        HashMap<String, HashMap<Long, String>> dataSets = new HashMap<>();
+        HashMap<String, HashMap<String, Long>> dataSets = new HashMap<>();
         ListIterator litr = tasks.listIterator();
         //iterate over a list of all the user's tasks
         while (litr.hasNext()){
             Task i = (Task) litr.next();
             String taskName = i.getName();
             ArrayList<TaskSession> sessions = new ArrayList<>(sessionDao.findAllByTask(i));
-            HashMap<Long, String> timeDates = new HashMap<>(); //this will contain the final dataset
+            HashMap<String, Long> timeDates = new HashMap<>(); //this will contain the final dataset
             //iterate over the list of sessions
             ListIterator sitr = sessions.listIterator();
             while (sitr.hasNext()){
                 TaskSession j = (TaskSession) sitr.next();
-                Long time = j.getLength(); //TODO - this is currently in seconds. That isn't ideal.
                 String date = j.getDate().format(DateTimeFormatter.ISO_LOCAL_DATE);
-                timeDates.put(time, date);
+                //check to see if date already exists in timedates hashmap
+                if (timeDates.containsKey(date)){
+                    timeDates.put(date, timeDates.get(date) + j.getLength());
+                } else {
+                    Long time = j.getLength(); //TODO - this is currently in seconds. That isn't ideal.
+                    timeDates.put(date, time);
+                }
             }
             dataSets.put(taskName, timeDates);
         }
