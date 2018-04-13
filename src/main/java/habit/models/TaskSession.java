@@ -32,6 +32,7 @@ public class TaskSession {
 
     // Called to stop clock running on a session, sets duration as well.
     public void stopClock(){
+        //TODO - figure out what on earth to do if they never stop the clock
         this.setStop(LocalTime.now());
         Duration fullLength = Duration.between(this.getStart(), this.getStop());
         this.length = fullLength.getSeconds();

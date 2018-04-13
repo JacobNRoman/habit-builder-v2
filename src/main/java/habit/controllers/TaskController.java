@@ -32,12 +32,17 @@ public class TaskController {
     @Autowired
     UserDao userDao;
 
-    @RequestMapping(value="")
-    public String index(Model model){
-
+    public User getCurrentUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
         User currentUser = userDao.findByEmail(currentPrincipalName);
+        return currentUser;
+    }
+
+    @RequestMapping(value="")
+    public String index(Model model){
+
+        User currentUser = getCurrentUser();
 
         model.addAttribute("title", "Tasks");
         model.addAttribute("tasks", taskDao.findAllByUser(currentUser));
@@ -65,12 +70,10 @@ public class TaskController {
         Once i get the current user's email I query the database for their full info. I think
         it might be possible to do this without the query by adding more info to the security context
         but I don't know if that is a good idea.
-        TODO - this snippet is not DRY. I used it three times on this page, need to refactor
          */
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentPrincipalName = authentication.getName();
-        User taskOwner = userDao.findByEmail(currentPrincipalName);
-        task.setUser(taskOwner);
+        User currentUser = getCurrentUser();
+
+        task.setUser(currentUser);
         taskDao.save(task);
         return "redirect:";
     }
@@ -117,9 +120,7 @@ public class TaskController {
     @RequestMapping(value="progress")
     public String progress(Model model){
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentPrincipalName = authentication.getName();
-        User currentUser = userDao.findByEmail(currentPrincipalName);
+        User currentUser = getCurrentUser();
 
         /*
         TODO - create datasets to pass to chart.js
@@ -144,10 +145,11 @@ public class TaskController {
             while (sitr.hasNext()){
                 TaskSession j = (TaskSession) sitr.next();
                 String date = j.getDate().format(DateTimeFormatter.ISO_LOCAL_DATE);
-                //check to see if date already exists in timedates hashmap
+                //check to see if date already exists in timedates hashmap. If so, update the length.
                 if (timeDates.containsKey(date)){
                     timeDates.put(date, timeDates.get(date) + j.getLength());
                 } else {
+                    //create the datetime pair
                     Long time = j.getLength(); //TODO - this is currently in seconds. That isn't ideal.
                     timeDates.put(date, time);
                 }

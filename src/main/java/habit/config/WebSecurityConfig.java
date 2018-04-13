@@ -44,26 +44,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable();
     }
+    //TODO - enable csrf
 
     @Bean(name = "passwordEncoder")
     public PasswordEncoder passwordencoder(){
         return new BCryptPasswordEncoder();
     }
-
-
-    /*
-    @Autowired
-    private DataSource dataSource;
-
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        // ensure the passwords are encoded properly
-        User.UserBuilder users = User.withDefaultPasswordEncoder();
-        auth
-                .jdbcAuthentication()
-                .dataSource((javax.sql.DataSource) dataSource)
-                .withDefaultSchema()
-                .withUser(users.username("user").password("password").roles("USER"))
-                .withUser(users.username("admin").password("password").roles("USER","ADMIN"));
-    }*/
 }

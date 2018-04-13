@@ -13,7 +13,7 @@ var numberOfTasks = Object.keys(myDataParsed).length;
 //setLabels are the labels for each dataset, ie the task names.
 var setLabels = Object.keys(myDataParsed);
 //there are fifteen colors in GraphColors, so that each new task can have a new color.
-var GraphColors = ['#ff0000', '#00ff00', '#0000ff', '#ffd400', '#ff00ff', '#00ffff', '#000000', '#008620', '#001a9f', '#0096ff', '#dccf00', '#8d0088', '#890101', '#beb4b4', '#686868'];
+var GraphColors = ['#7986cb', '#9575cd', '#4db6ac', '#e57373', '#a1887f', '#fff176', '#f06292', '#008620', '#001a9f', '#0096ff', '#dccf00', '#8d0088', '#890101', '#beb4b4', '#686868'];
 //GraphDatasetsArray will contain all the datasets, formatted for chart.js
 var GraphDatasetsArray = [];
 var labelsArray = [];
@@ -39,6 +39,7 @@ for (i=0; i < numberOfTasks; i++){
             dataArray.push(dataPoint);
         }
     }
+    //sort each task's array of datapoints so they plot correctly
     dataArray.sort(dateComparator);
     GraphDatasetsArray[i] =
         {
@@ -95,14 +96,10 @@ var progressChart = new Chart(ctx, LineChartConfig);
     </tr>
     <tr th:each="taskSession : ${taskSessions}">
         <td th:text="${#temporals.format(taskSession.date, 'dd/MMM/yyyy')}"></td>
-       <!-- <td th:text="${#temporals.format(taskSession.start, 'HH:mm')}"></td>
-        <td th:text="${#temporals.format(taskSession.stop, 'HH:mm')}"></td> -->
         <td th:text="${taskSession.task.name}"></td>
         <td th:text="${taskSession.lengthToString}"></td>
     </tr>
 </table>
-
-<p th:text="${datasets}"></p>
 
 </body>
 </html>
