@@ -7,8 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6610cca1-2a12-4b23-a11e-9e4e44e49259" name="Default" comment="Integrated habit-builder architecture">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/habit_builder_v2_jar.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/manifest.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.6/fileContent/annotation-processors.bin" afterPath="$PROJECT_DIR$/.gradle/4.6/fileContent/annotation-processors.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.6/fileContent/fileContent.lock" afterPath="$PROJECT_DIR$/.gradle/4.6/fileContent/fileContent.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" />
@@ -19,7 +17,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/habit/controllers/TaskController.java" afterPath="$PROJECT_DIR$/src/main/java/habit/controllers/TaskController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/application.properties" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -74,16 +72,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="Task.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/habit/models/Task.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="23" column="6" lean-forward="false" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="RegistrationController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/habit/controllers/RegistrationController.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -154,11 +142,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="manifest.yml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="manifest.yml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/manifest.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="75">
               <caret line="3" column="56" lean-forward="false" selection-start-line="3" selection-start-column="56" selection-end-line="3" selection-end-column="56" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application.properties" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="15" column="50" lean-forward="false" selection-start-line="15" selection-start-column="50" selection-end-line="15" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -550,7 +548,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/src/main/java/habit/config/MvcConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/habit/models/User.java" />
         <option value="$PROJECT_DIR$/src/main/java/habit/models/UserDto.java" />
@@ -566,6 +563,7 @@
         <option value="$PROJECT_DIR$/src/main/java/habit/models/Task.java" />
         <option value="$PROJECT_DIR$/src/main/java/habit/controllers/TaskController.java" />
         <option value="$PROJECT_DIR$/manifest.yml" />
+        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
       </list>
     </option>
   </component>
@@ -884,7 +882,14 @@
       <option name="project" value="LOCAL" />
       <updated>1523645331099</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="created jar and added manifest.yml">
+      <created>1524155756418</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1524155756418</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView">
@@ -968,7 +973,8 @@
     <MESSAGE value="Fixed charts so that they display data properly. Introduced new, less severe bug: lines inexplicably flow backwards." />
     <MESSAGE value="Fixed line drawing bug with charts - required re-organizing the java queries and data structure of the json, and then sorting the datapoints in chrono order" />
     <MESSAGE value="Refactored getCurrentUser" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactored getCurrentUser" />
+    <MESSAGE value="created jar and added manifest.yml" />
+    <option name="LAST_COMMIT_MESSAGE" value="created jar and added manifest.yml" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1233,14 +1239,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="9" column="26" lean-forward="true" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/habit/models/TaskSessionDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
@@ -1333,6 +1331,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="3" column="56" lean-forward="false" selection-start-line="3" selection-start-column="56" selection-end-line="3" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="15" column="50" lean-forward="false" selection-start-line="15" selection-start-column="50" selection-end-line="15" selection-end-column="50" />
           <folding />
         </state>
       </provider>
