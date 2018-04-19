@@ -33,6 +33,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-security")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("org.springframework.boot:spring-boot-devtools")
+    compile('org.flywaydb:flyway-core')
     compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.13'
     compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
     testCompile("junit:junit")
