@@ -123,7 +123,6 @@ public class TaskController {
         User currentUser = getCurrentUser();
 
         /*
-        TODO - create datasets to pass to chart.js
         Step 1 - find all tasks belonging to current user
         Step 2 - per task, create a hashset of time/date pairs for each session
         Step 3 - wrap up datasets and pass to chart using json

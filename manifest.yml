@@ -1,0 +1,4 @@
+applications:
+- name: habit-builder-v2
+  buildpack: java_buildpack
+  path: out/artifacts/habit_builder_v2_jar/habit-builder-v2.jar
