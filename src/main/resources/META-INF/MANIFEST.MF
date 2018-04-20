@@ -1,0 +1,43 @@
+Manifest-Version: 1.0
+Class-Path: spring-tx-5.0.4.RELEASE.jar aspectjweaver-1.8.13.jar valid
+ ation-api-2.0.1.Final.jar flyway-core-5.0.7.jar tomcat-embed-el-8.5.2
+ 8.jar spring-boot-starter-2.0.0.RELEASE.jar thymeleaf-spring5-3.0.9.R
+ ELEASE.jar jackson-module-parameter-names-2.9.4.jar HikariCP-2.7.8.ja
+ r hibernate-validator-6.0.7.Final.jar spring-boot-starter-web-2.0.0.R
+ ELEASE.jar spring-boot-starter-test-2.0.0.RELEASE.jar thymeleaf-extra
+ s-java8time-3.0.1.RELEASE.jar xmlunit-core-2.5.1.jar spring-security-
+ core-5.0.3.RELEASE.jar jackson-datatype-jsr310-2.9.4.jar tomcat-embed
+ -core-8.5.28.jar mysql-connector-java-5.1.13.jar junit-4.12.jar asm-5
+ .0.4.jar byte-buddy-1.7.10.jar accessors-smart-1.2.jar jackson-core-2
+ .9.4.jar jul-to-slf4j-1.7.25.jar spring-security-web-5.0.3.RELEASE.ja
+ r hamcrest-core-1.3.jar hibernate-core-5.2.14.Final.jar jackson-annot
+ ations-2.9.0.jar javassist-3.22.0-GA.jar spring-boot-test-autoconfigu
+ re-2.0.0.RELEASE.jar spring-boot-starter-json-2.0.0.RELEASE.jar log4j
+ -to-slf4j-2.10.0.jar spring-boot-starter-jdbc-2.0.0.RELEASE.jar antlr
+ -2.7.7.jar objenesis-2.6.jar javax.transaction-api-1.2.jar spring-boo
+ t-2.0.0.RELEASE.jar hibernate-commons-annotations-5.0.1.Final.jar spr
+ ing-expression-5.0.4.RELEASE.jar spring-security-config-5.0.3.RELEASE
+ .jar spring-jcl-5.0.4.RELEASE.jar spring-core-5.0.4.RELEASE.jar unbes
+ cape-1.1.5.RELEASE.jar spring-webmvc-5.0.4.RELEASE.jar spring-boot-te
+ st-2.0.0.RELEASE.jar snakeyaml-1.19.jar spring-data-jpa-2.0.5.RELEASE
+ .jar hamcrest-library-1.3.jar jandex-2.0.3.Final.jar json-smart-2.3.j
+ ar spring-orm-5.0.4.RELEASE.jar spring-beans-5.0.4.RELEASE.jar jsonas
+ sert-1.5.0.jar spring-boot-autoconfigure-2.0.0.RELEASE.jar spring-boo
+ t-starter-security-2.0.0.RELEASE.jar gson-2.7.jar javax.annotation-ap
+ i-1.3.2.jar assertj-core-3.9.1.jar mockito-core-2.15.0.jar attoparser
+ -2.0.4.RELEASE.jar hibernate-jpa-2.1-api-1.0.0.Final.jar spring-test-
+ 5.0.4.RELEASE.jar spring-boot-starter-logging-2.0.0.RELEASE.jar sprin
+ g-boot-starter-tomcat-2.0.0.RELEASE.jar spring-web-5.0.4.RELEASE.jar 
+ classmate-1.3.4.jar thymeleaf-3.0.9.RELEASE.jar logback-core-1.2.3.ja
+ r spring-boot-starter-data-jpa-2.0.0.RELEASE.jar spring-boot-starter-
+ thymeleaf-2.0.0.RELEASE.jar dom4j-1.6.1.jar json-path-2.4.0.jar byte-
+ buddy-agent-1.7.10.jar spring-data-commons-2.0.5.RELEASE.jar log4j-ap
+ i-2.10.0.jar spring-boot-starter-aop-2.0.0.RELEASE.jar android-json-0
+ .0.20131108.vaadin1.jar spring-security-test-5.0.3.RELEASE.jar spring
+ -aspects-5.0.4.RELEASE.jar jboss-logging-3.3.2.Final.jar logback-clas
+ sic-1.2.3.jar slf4j-api-1.7.25.jar spring-boot-devtools-2.0.0.RELEASE
+ .jar spring-jdbc-5.0.4.RELEASE.jar spring-aop-5.0.4.RELEASE.jar tomca
+ t-embed-websocket-8.5.28.jar jackson-databind-2.9.4.jar jackson-datat
+ ype-jdk8-2.9.4.jar spring-context-5.0.4.RELEASE.jar
+Main-Class: habit.Application
+

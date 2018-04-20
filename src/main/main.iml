@@ -20,5 +20,7 @@
     <orderEntry type="library" name="Gradle: org.springframework.security:spring-security-config:5.0.3.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.security:spring-security-core:5.0.3.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.7" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-autoconfigure:2.0.0.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot:2.0.0.RELEASE" level="project" />
   </component>
 </module>
