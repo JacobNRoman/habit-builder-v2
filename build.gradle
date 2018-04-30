@@ -17,6 +17,17 @@ bootJar {
     baseName = 'habit-builder-v2'
     version =  '0.1.0'
 }
+jar.enabled = true
+
+jar {
+    manifest {
+        attributes "Main-Class": "habit.Application"
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
 
 repositories {
     mavenCentral()
