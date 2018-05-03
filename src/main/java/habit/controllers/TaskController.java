@@ -1,10 +1,10 @@
 package habit.controllers;
 
-import com.google.gson.Gson;
 import habit.models.Task;
 import habit.models.TaskSession;
 import habit.models.User;
 import habit.models.UserDao;
+import habit.util.ProgressDataset;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,22 +15,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import javax.validation.Valid;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Controller
 public class TaskController {
 
     @Autowired
-    habit.models.TaskDao taskDao;
+    private habit.models.TaskDao taskDao;
 
     @Autowired
-    habit.models.TaskSessionDao sessionDao;
+    private habit.models.TaskSessionDao sessionDao;
 
     @Autowired
-    UserDao userDao;
+    private UserDao userDao;
 
     public User getCurrentUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -65,12 +63,6 @@ public class TaskController {
 
             return "add";
         }
-        /*
-        Below is a quick and possibly hacky way to get the current logged in user's credentials.
-        Once i get the current user's email I query the database for their full info. I think
-        it might be possible to do this without the query by adding more info to the security context
-        but I don't know if that is a good idea.
-         */
         User currentUser = getCurrentUser();
 
         task.setUser(currentUser);
@@ -121,47 +113,12 @@ public class TaskController {
     public String progress(Model model){
 
         User currentUser = getCurrentUser();
-
-        /*
-        TODO - create datasets to pass to chart.js
-        Step 1 - find all tasks belonging to current user
-        Step 2 - per task, create a hashset of time/date pairs for each session
-        Step 3 - wrap up datasets and pass to chart using json
-         */
-
         ArrayList<Task> tasks = new ArrayList<>(taskDao.findAllByUser(currentUser));
-        // dataSets is a list that will hold the sets of time/date pairs associated with each task
-        // the dates will be strings formatted to ISO 8601. Structure: HashMap<String taskname, Hashmap<length, date>>
-        HashMap<String, HashMap<String, Long>> dataSets = new HashMap<>();
-        ListIterator litr = tasks.listIterator();
-        //iterate over a list of all the user's tasks
-        while (litr.hasNext()){
-            Task i = (Task) litr.next();
-            String taskName = i.getName();
-            ArrayList<TaskSession> sessions = new ArrayList<>(sessionDao.findAllByTask(i));
-            HashMap<String, Long> timeDates = new HashMap<>(); //this will contain the final dataset
-            //iterate over the list of sessions
-            ListIterator sitr = sessions.listIterator();
-            while (sitr.hasNext()){
-                TaskSession j = (TaskSession) sitr.next();
-                String date = j.getDate().format(DateTimeFormatter.ISO_LOCAL_DATE);
-                //check to see if date already exists in timedates hashmap. If so, update the length.
-                if (timeDates.containsKey(date)){
-                    timeDates.put(date, timeDates.get(date) + j.getLength());
-                } else {
-                    //create the datetime pair
-                    Long time = j.getLength(); //TODO - this is currently in seconds. That isn't ideal.
-                    timeDates.put(date, time);
-                }
-            }
-            dataSets.put(taskName, timeDates);
-        }
-        Gson gson = new Gson();
-        String jsonDataset = gson.toJson(dataSets);
+        String datasets = ProgressDataset.getProgressDataset(tasks, sessionDao);
 
         model.addAttribute("title", "My Progress");
         model.addAttribute("taskSessions", sessionDao.findAllByTaskUserOrderByIdDesc(currentUser));
-        model.addAttribute("datasets", jsonDataset);
+        model.addAttribute("datasets", datasets);
 
         return "progress";
     }
